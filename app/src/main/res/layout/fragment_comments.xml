@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".fragments.CommentsFragment">
+
+    <TextView
+        android:id="@+id/add_comment_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add comment"
+        android:layout_margin="5dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/comment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_comment_text"
+        >
+
+        <EditText
+            android:id="@+id/commnet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/send_comment"
+            android:hint="type here"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <Button
+            android:id="@+id/send_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:text="Post"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/follow_btn_bg"
+            />
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comments_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/comment_layout"
+        android:layout_margin="5dp"
+        />
+
+</RelativeLayout>
