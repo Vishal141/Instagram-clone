@@ -37,7 +37,10 @@ class PostActivity : AppCompatActivity() {
                 }
                 R.id.nav_add-> selectedFragment = AddFragment()
                 R.id.nav_notification-> selectedFragment = NotificationFragment()
-                R.id.nav_profile-> selectedFragment = ProfileFragment()
+                R.id.nav_profile-> {
+                    Global.profileUserId = Global.currentUserId
+                    selectedFragment = ProfileFragment()
+                }
             }
 
             if (selectedFragment==null)

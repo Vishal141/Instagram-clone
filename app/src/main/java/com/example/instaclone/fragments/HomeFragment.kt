@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
+        println(Global.currentUserId)
         var root:View = inflater.inflate(R.layout.fragment_home, container, false)
 
         recyclerView = root.findViewById(R.id.home_recyclerView)
@@ -74,7 +74,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getPosts(){
-        var reference:DatabaseReference = FirebaseDatabase.getInstance().getReference().child("Post");
+        var reference:DatabaseReference = FirebaseDatabase.getInstance().getReference().child("Posts");
         reference.addValueEventListener(object :ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
 

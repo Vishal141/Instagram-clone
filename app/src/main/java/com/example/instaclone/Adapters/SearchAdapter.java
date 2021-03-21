@@ -1,7 +1,6 @@
 package com.example.instaclone.Adapters;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +78,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.profileUser = userList.get(position);
+                Global.profileUserId = userList.get(position).getId();
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
             }
         });
@@ -120,7 +119,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image_profile);
-            username = itemView.findViewById(R.id.email);
+            username = itemView.findViewById(R.id.username);
             name = itemView.findViewById(R.id.fullname);
             followBtn = itemView.findViewById(R.id.follow_btn);
 

@@ -31,9 +31,9 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         name = findViewById(R.id.name);
-        email = findViewById(R.id.email);
+        email = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        username = findViewById(R.id.email);
+        username = findViewById(R.id.username);
 
         mAuth = FirebaseAuth.getInstance()
 

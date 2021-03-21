@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ll1"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="50dp"
         app:cardBackgroundColor="#F8F7F7"
         app:cardCornerRadius="20dp">
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/email"
+                android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -143,7 +143,7 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/email"
+                android:layout_below="@+id/username"
                 android:layout_marginLeft="5dp"
                 android:layout_marginBottom="5dp"
                 android:text="Name" />
@@ -171,6 +171,7 @@
     </androidx.cardview.widget.CardView>
 
     <RelativeLayout
+        android:id="@+id/rl1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cardView"
@@ -190,9 +191,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="your posts"
+            android:text="posts"
             android:layout_below="@+id/post_view"
-            android:layout_marginLeft="65dp"
+            android:layout_marginLeft="70dp"
             />
 
         <ImageButton
@@ -214,6 +215,13 @@
             />
 
     </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profile_post_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl1"
+        />
 
 
 </RelativeLayout>

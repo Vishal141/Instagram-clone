@@ -5,14 +5,11 @@ import android.content.Intent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.renderscript.Sampler
 import android.text.TextUtils
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import com.example.instaclone.MainActivity
 import com.example.instaclone.Models.Global
-import com.example.instaclone.Models.User
 import com.example.instaclone.PostActivity
 import com.example.instaclone.R
 import com.google.android.gms.tasks.OnCompleteListener
@@ -33,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        email = findViewById(R.id.email)
+        email = findViewById(R.id.username)
         password = findViewById(R.id.password)
 
         mAuth = FirebaseAuth.getInstance()
