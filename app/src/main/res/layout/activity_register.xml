@@ -9,9 +9,10 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         android:layout_margin="30dp"
         app:cardCornerRadius="30dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -52,6 +53,20 @@
                 android:padding="10dp" />
 
             <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edit_text_bg"
+                android:drawableRight="@drawable/ic_baseline_email_24"
+                android:ems="10"
+                android:hint="username"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
+
+            <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,9 +84,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
                 android:background="@drawable/login_btn_bg"
+                android:onClick="signUp"
                 android:text="Sign up"
                 android:textColor="#fff" />
 
@@ -81,7 +97,9 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp"
                 android:background="#63E64C"
+                android:onClick="backToLogin"
                 android:text="Back to login"
                 android:textColor="#fff" />
 

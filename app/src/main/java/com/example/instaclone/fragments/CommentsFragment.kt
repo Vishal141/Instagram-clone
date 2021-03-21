@@ -33,7 +33,7 @@ class CommentsFragment : Fragment() {
 
         comment = root.findViewById(R.id.commnet)
         sendBtn = root.findViewById(R.id.send_comment)
-        commentsView = root.findViewById(R.id.comments_recyclerView);
+        commentsView = root.findViewById(R.id.comments_recyclerView)
 
         var c1 = Comment("v1","","","hello")
         var c2 = Comment("v2","","","nice pic")
@@ -47,7 +47,7 @@ class CommentsFragment : Fragment() {
         commentList!!.add(c4)
 
         adapter = CommentAdapter(activity,commentList)
-        commentsView!!.layoutManager = LinearLayoutManager(context)
+        commentsView!!.layoutManager = LinearLayoutManager(activity)
         commentsView!!.adapter = adapter
 
         sendBtn!!.setOnClickListener { v->

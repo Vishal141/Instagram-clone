@@ -13,8 +13,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instaclone.Adapters.SearchAdapter
+import com.example.instaclone.Models.Global
 import com.example.instaclone.Models.User
 import com.example.instaclone.R
+import com.google.firebase.database.*
+import java.lang.Exception
 
 class SearchFragment : Fragment() {
     var recyclerView:RecyclerView?=null
@@ -32,16 +35,6 @@ class SearchFragment : Fragment() {
         var root:View = inflater.inflate(R.layout.fragment_search, container, false)
 
         userList = ArrayList<User>()
-        var u1 = User("1","vishal1","v1@gmal.com","vishal","","")
-        var u2 = User("2","vishal2","v1@gmal.com","vishal ahirwar","","")
-        var u3 = User("3","vishal3","v1@gmal.com","ashok ahirwar","","")
-        var u4 = User("4","vishal4","v1@gmal.com","Naman","","")
-        var u5 = User("5","vishal5","v1@gmal.com","shreyansh","","")
-        userList!!.add(u1)
-        userList!!.add(u2)
-        userList!!.add(u3)
-        userList!!.add(u4)
-        userList!!.add(u5)
 
         recyclerView = root.findViewById(R.id.search_recyclerView)
         searchBar = root.findViewById(R.id.search_bar)
@@ -52,6 +45,8 @@ class SearchFragment : Fragment() {
         adapter = SearchAdapter(this.context,userList)
         recyclerView!!.adapter = adapter
 
+        readUser()
+
         searchBar!!.addTextChangedListener(object :TextWatcher{
             override fun afterTextChanged(s: Editable?) {
             }
@@ -60,9 +55,7 @@ class SearchFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                var users = searchUser(s.toString())
-                adapter = SearchAdapter(context,users)
-                recyclerView!!.adapter = adapter
+                searchUser(s.toString())
             }
 
         })
@@ -70,13 +63,41 @@ class SearchFragment : Fragment() {
         return root
     }
 
-    fun searchUser(sequence:String):ArrayList<User> {
-        var users = ArrayList<User>()
-        for (u:User in userList!!){
-            if(u.fullName.contains(sequence) || u.username.contains(sequence))
-                users.add(u)
+    fun searchUser(sequence:String) {
+        var users:ArrayList<User> = ArrayList()
+        for(usr:User in userList!!){
+            if(usr.username.contains(sequence) || usr.email.contains(sequence) || usr.fullname.contains(sequence))
+                users.add(usr)
         }
-        return users
+
+        adapter = SearchAdapter(activity,users)
+        recyclerView!!.adapter = adapter
+    }
+
+    fun readUser(){
+        var reference:DatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        reference.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                userList!!.clear()
+                for(dataSnapshot:DataSnapshot in snapshot.children){
+                    try {
+                        var user:User? = dataSnapshot.getValue(User::class.java)
+                        if(!user!!.id.equals(Global.currentUserId)){
+                            userList!!.add(user)
+                        }
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
+                }
+
+                adapter!!.notifyDataSetChanged()
+            }
+
+        })
     }
 
 }

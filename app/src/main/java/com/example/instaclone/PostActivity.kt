@@ -1,10 +1,13 @@
 package com.example.instaclone
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.example.instaclone.Adapters.SearchAdapter
+import com.example.instaclone.Models.Global
 import com.example.instaclone.fragments.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView

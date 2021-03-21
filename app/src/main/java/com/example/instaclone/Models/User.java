@@ -4,7 +4,7 @@ public class User {
     private String id;
     private String username;
     private String email;
-    private String fullName;
+    private String fullname;
     private String imgUrl;
     private String bio;
 
@@ -12,7 +12,7 @@ public class User {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.fullName = fullName;
+        this.fullname = fullName;
         this.imgUrl = imgUrl;
         this.bio = bio;
     }
@@ -44,12 +44,12 @@ public class User {
         this.email = email;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFullname(String fullName) {
+        this.fullname = fullName;
     }
 
     public String getImgUrl() {

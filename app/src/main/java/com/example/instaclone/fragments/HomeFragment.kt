@@ -11,8 +11,11 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instaclone.Adapters.PostItemAdapter
+import com.example.instaclone.Models.Global
 import com.example.instaclone.Models.Post
+import com.example.instaclone.Models.User
 import com.example.instaclone.R
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.post_item.*
 
 class HomeFragment : Fragment() {
@@ -21,9 +24,7 @@ class HomeFragment : Fragment() {
     var adapter:PostItemAdapter?=null
 
     var postList:ArrayList<Post>?=null
-
-    var comment_image:ImageView?=null
-    var frameLayout:FrameLayout?=null
+    var followingList:ArrayList<String>?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,29 +37,60 @@ class HomeFragment : Fragment() {
         recyclerView = root.findViewById(R.id.home_recyclerView)
 
         postList = ArrayList<Post>()
+        followingList = ArrayList<String>()
 
-        var p1 = Post()
-        p1.username = "vishal"
-        var p2 = Post()
-        p2.username = "shreyansh"
-        var p3 = Post()
-        p3.username = "Rahul"
-        var p4 = Post()
-        p4.username = "Naman"
-        var p5 = Post()
-        p5.username = "Chetan"
-
-        postList!!.add(p1)
-        postList!!.add(p2)
-        postList!!.add(p3)
-        postList!!.add(p4)
-        postList!!.add(p5)
-
-        recyclerView!!.layoutManager = LinearLayoutManager(activity)
+        var layoutManager = LinearLayoutManager(activity)
+        layoutManager.stackFromEnd = true
+        layoutManager.reverseLayout = true
+        recyclerView!!.setHasFixedSize(true)
+        recyclerView!!.layoutManager = layoutManager
         adapter = PostItemAdapter(activity,postList)
 
         recyclerView!!.adapter = adapter
 
+        getFollowings()
+
         return root
-}
+    }
+
+    private fun getFollowings(){
+        var databaseReference:DatabaseReference = FirebaseDatabase.getInstance().getReference().child("follow")
+            .child(Global.currentUserId).child("following")
+        databaseReference.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                followingList!!.clear()
+                for(dataSnapShot:DataSnapshot in snapshot.children){
+                    followingList!!.add(dataSnapShot.key!!)
+                }
+
+                getPosts()
+            }
+
+        })
+    }
+
+    private fun getPosts(){
+        var reference:DatabaseReference = FirebaseDatabase.getInstance().getReference().child("Post");
+        reference.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                postList!!.clear()
+                for(dataSnapshot:DataSnapshot in snapshot.children){
+                    var post:Post? = dataSnapshot.getValue(Post::class.java)
+                    if(followingList!!.contains(post!!.publisher))
+                        postList!!.add(post)
+                }
+                adapter!!.notifyDataSetChanged()
+            }
+
+        })
+    }
+
 }

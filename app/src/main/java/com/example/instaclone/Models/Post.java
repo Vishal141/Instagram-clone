@@ -3,45 +3,35 @@ package com.example.instaclone.Models;
 import java.util.StringTokenizer;
 
 public class Post {
-    private String username;
-    private String profileImgUrl;
-    private String postImgUrl;
+    private String postId;
+    private String postImage;
     private String description;
-    private String likes;
-    private String comments;
+    private String publisher;
 
     public Post() {
     }
 
-    public Post(String username, String profileImgUrl, String postImgUrl, String description) {
-        this.username = username;
-        this.profileImgUrl = profileImgUrl;
-        this.postImgUrl = postImgUrl;
+    public Post(String postId, String postImage, String description, String publisher) {
+        this.postId = postId;
+        this.postImage = postImage;
         this.description = description;
+        this.publisher = publisher;
     }
 
-    public String getUsername() {
-        return username;
+    public String getPostId() {
+        return postId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 
-    public String getProfileImgUrl() {
-        return profileImgUrl;
+    public String getPostImage() {
+        return postImage;
     }
 
-    public void setProfileImgUrl(String profileImgUrl) {
-        this.profileImgUrl = profileImgUrl;
-    }
-
-    public String getPostImgUrl() {
-        return postImgUrl;
-    }
-
-    public void setPostImgUrl(String postImgUrl) {
-        this.postImgUrl = postImgUrl;
+    public void setPostImage(String postImage) {
+        this.postImage = postImage;
     }
 
     public String getDescription() {
@@ -52,19 +42,11 @@ public class Post {
         this.description = description;
     }
 
-    public String getLikes() {
-        return likes;
+    public String getPublisher() {
+        return publisher;
     }
 
-    public void setLikes(String likes) {
-        this.likes = likes;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 }
